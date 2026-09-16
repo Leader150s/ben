@@ -2,45 +2,296 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>DMS | مصمم ومبرمج</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>واجهة الموقع الرئيسية</title>
+    <!-- خط تجوال من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
         body {
-            background-color: #0f0f0f; /* لون غامق فخم مثل الـ Omen */
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            padding: 50px;
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
-        .profile-img {
-            width: 150px;
-            border-radius: 50%;
-            border: 3px solid #ff4b2b; /* لمسة لون أحمر مثل شعار أومن */
+
+        /* خلفية متدرجة ناعمة */
+        .glow-bg {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
         }
-        h1 { color: #ff4b2b; }
-        .links a {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
-            background: #222;
-            color: white;
+
+        /* شريط التنقل */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav a {
+            color: #94a3b8;
             text-decoration: none;
-            border-radius: 5px;
+            margin-right: 25px;
+            font-weight: 500;
             transition: 0.3s;
         }
-        .links a:hover { background: #ff4b2b; }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        .btn-main {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #0b0f19;
+            padding: 10px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+        }
+
+        /* القسم الرئيسي Hero */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 90px 20px 60px;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .hero-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 35px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #f1f5f9;
+            padding: 10px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* قسم البطاقات والميزات */
+        .features {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: #f8fafc;
+        }
+
+        .card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 50px;
+        }
+
+        /* تجاوب مع شاشات الجوال */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 5%;
+            }
+            nav {
+                display: none; /* إخفاء الروابط للتبسيط على الجوال */
+            }
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn-main, .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <img src="logo.png" alt="DMS Logo" class="profile-img">
-    <h1>أهلاً، أنا DMS</h1>
-    <p>مصمم جرافيك | مبرمج سكربتات Roblox | مطور في مجتمع DMS1</p>
+    <div class="glow-bg"></div>
 
-    <div class="links">
-        <a href="https://github.com/yourusername">حسابي على GitHub</a>
-        <a href="https://discord.gg/DMS1">سيرفر الديسكورد</a>
-        <a href="#">أعمالي في التصميم</a>
-    </div>
+    <!-- شريط الرأس -->
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-code"></i>
+            <span>مشروعي</span>
+        </div>
+        <nav>
+            <a href="#">الرئيسية</a>
+            <a href="#features">المميزات</a>
+            <a href="#about">حول الموقع</a>
+        </nav>
+        <button class="btn-main" onclick="alert('أهلاً بك في موقعنا الجديد!')">ابدأ الآن</button>
+    </header>
+
+    <!-- واجهة الموقع الترحيبية -->
+    <section class="hero">
+        <div class="hero-badge">
+            <i class="fa-solid fa-bolt"></i> واجهة سريعة وخفيفة
+        </div>
+        <h1>ابنِ مشروعك القادم بأسلوب <span>احترافي وحديث</span></h1>
+        <p>هذه الواجهة مجهزة بالكامل لتكون منصتك الخاصة على الإنترنت، متناسقة وسريعة وسهلة التعديل بأي وقت.</p>
+        <div class="hero-actions">
+            <a href="#features" class="btn-main">استكشف الأقسام</a>
+            <a href="#" class="btn-secondary">معلومات أكثر</a>
+        </div>
+    </section>
+
+    <!-- قسم البطاقات والمميزات -->
+    <section class="features" id="features">
+        <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <h3>متوافق مع الجوال</h3>
+            <p>التصميم يتجاوب تلقائياً مع أحجام الشاشات المختلفة سواء كنت تتصفح من الموبايل أو شاشة الكمبيوتر.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-gauge-high"></i></div>
+            <h3>سرعة تحميل فائقة</h3>
+            <p>الكود مكتوب بـ HTML و CSS خالص بدون أي مكتبات ثقيلة تبطئ الموقع.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3>استضافة مجانية 100%</h3>
+            <p>مرفوع ومدعوم مباشرة عبر سيرفرات GitHub Pages بدون الحاجة لدفع سنت واحد.</p>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2026 | تم الإنشاء بواسطة GitHub Pages</p>
+    </footer>
 
 </body>
 </html>
