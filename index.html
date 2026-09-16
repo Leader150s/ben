@@ -3,295 +3,614 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>واجهة الموقع الرئيسية</title>
-    <!-- خط تجوال من جوجل -->
+    <title>Ben Scripts - سكريتات روبلوكس</title>
+    <!-- خط تجوال وأيقونات Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <!-- أيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
+        :root {
+            --bg-color: #08080a;
+            --card-bg: #111116;
+            --primary-red: #e50914;
+            --accent-red: #ff1e27;
+            --glow-red: rgba(229, 9, 20, 0.35);
+            --border-red: rgba(255, 30, 39, 0.25);
+            --text-main: #ffffff;
+            --text-muted: #8e8e93;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: #0b0f19;
-            color: #e2e8f0;
-            overflow-x: hidden;
-            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
         }
 
-        /* خلفية متدرجة ناعمة */
-        .glow-bg {
-            position: absolute;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(0,0,0,0) 70%);
-            z-index: -1;
+        /* حاوية العرض للموبايل */
+        .app-container {
+            width: 100%;
+            max-width: 440px;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            padding: 15px 16px 90px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
         }
 
-        /* شريط التنقل */
-        header {
+        /* 1. الشريط العلوي */
+        .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 8%;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 10px 0 16px;
         }
 
         .logo {
-            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1.8rem;
             font-weight: 900;
-            color: #38bdf8;
+            color: var(--accent-red);
+            text-shadow: 0 0 15px var(--glow-red);
+            font-style: italic;
+        }
+
+        .top-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #14141b;
+            border: 1px solid var(--border-red);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .notif-badge {
+            position: absolute;
+            top: 7px;
+            right: 8px;
+            width: 7px;
+            height: 7px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            box-shadow: 0 0 6px var(--accent-red);
+        }
+
+        /* 2. البانر الرئيسي */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(35, 5, 8, 0.9), rgba(15, 3, 5, 0.95)), 
+                        radial-gradient(circle at top right, rgba(229, 9, 20, 0.4), transparent);
+            border: 1px solid var(--border-red);
+            border-radius: 20px;
+            padding: 22px 18px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.15);
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent-red);
+            margin-bottom: 6px;
+            text-shadow: 0 0 10px var(--glow-red);
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .hero-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .btn-banner {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(90deg, #c40710, #ff1e27);
+            color: #fff;
+            border: none;
+            padding: 9px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 30, 39, 0.4);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 14px;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #2b2b36;
+        }
+
+        .dot.active {
+            background: var(--accent-red);
+            box-shadow: 0 0 6px var(--accent-red);
+        }
+
+        /* 3. شريط البحث */
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #101015;
+            border: 1px solid var(--border-red);
+            border-radius: 14px;
+            padding: 10px 14px;
+            gap: 10px;
+            margin-bottom: 18px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .search-box i {
+            color: var(--accent-red);
+            font-size: 1rem;
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .search-box input::placeholder {
+            color: #63636e;
+        }
+
+        /* 4. شبكة الأقسام السريعة */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+
+        .category-card {
+            background: #111116;
+            border: 1px solid var(--border-red);
+            border-radius: 14px;
+            padding: 12px 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .category-card:active {
+            transform: scale(0.95);
+            border-color: var(--accent-red);
+        }
+
+        .category-card i {
+            color: var(--accent-red);
+            font-size: 1.25rem;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .category-card span {
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: #d1d1d6;
+        }
+
+        /* 5. رأس القائمة */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .section-title i {
+            color: var(--accent-red);
+        }
+
+        .view-all {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        /* 6. كروت السكريبتات */
+        .scripts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .script-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-red);
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .script-thumb {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 30, 39, 0.2);
+            flex-shrink: 0;
+        }
+
+        .script-info {
+            flex-grow: 1;
+        }
+
+        .badge {
+            background: rgba(229, 9, 20, 0.15);
+            color: var(--accent-red);
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .script-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .script-desc {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .script-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.68rem;
+            color: #63636e;
+        }
+
+        .script-meta span {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .btn-download {
+            background: linear-gradient(90deg, #c40710, #ff1e27);
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            flex-shrink: 0;
+            box-shadow: 0 3px 10px rgba(229, 9, 20, 0.3);
+        }
+
+        /* 7. إعلان تيليجرام */
+        .tg-banner {
+            background: linear-gradient(90deg, #180a0d, #1f070a);
+            border: 1px solid var(--border-red);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.1);
+        }
+
+        .tg-content {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        nav a {
-            color: #94a3b8;
-            text-decoration: none;
-            margin-right: 25px;
-            font-weight: 500;
-            transition: 0.3s;
+        .tg-icon {
+            font-size: 1.8rem;
+            color: var(--accent-red);
         }
 
-        nav a:hover {
-            color: #38bdf8;
-        }
-
-        .btn-main {
-            background: linear-gradient(135deg, #0284c7, #38bdf8);
-            color: #0b0f19;
-            padding: 10px 22px;
-            border-radius: 10px;
-            text-decoration: none;
+        .tg-text h4 {
+            font-size: 0.88rem;
             font-weight: 700;
-            transition: 0.3s;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .tg-text p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .btn-tg {
+            background: linear-gradient(90deg, #c40710, #ff1e27);
+            color: #fff;
             border: none;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
             cursor: pointer;
+            white-space: nowrap;
         }
 
-        .btn-main:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+        /* 8. شريط التنقل السفلي الثابت */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 440px;
+            background: rgba(12, 12, 16, 0.95);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-red);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
         }
 
-        /* القسم الرئيسي Hero */
-        .hero {
+        .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            padding: 90px 20px 60px;
-            max-width: 850px;
-            margin: auto;
-        }
-
-        .hero-badge {
-            background: rgba(56, 189, 248, 0.1);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            margin-bottom: 25px;
-            display: inline-block;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(135deg, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            color: #94a3b8;
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 35px;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: #f1f5f9;
-            padding: 10px 22px;
-            border-radius: 10px;
+            color: #63636e;
             text-decoration: none;
-            font-weight: 700;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.3s;
+            font-size: 0.7rem;
+            gap: 4px;
         }
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .nav-item i {
+            font-size: 1.15rem;
         }
 
-        /* قسم البطاقات والميزات */
-        .features {
-            max-width: 1100px;
-            margin: 60px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+        .nav-item.active {
+            color: var(--accent-red);
         }
 
-        .card {
-            background: #111827;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 30px;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(56, 189, 248, 0.4);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .card-icon {
-            width: 55px;
-            height: 55px;
-            border-radius: 12px;
-            background: rgba(56, 189, 248, 0.1);
-            color: #38bdf8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            color: #f8fafc;
-        }
-
-        .card p {
-            color: #94a3b8;
-            font-size: 0.95rem;
-        }
-
-        /* الفوتر */
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #64748b;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 50px;
-        }
-
-        /* تجاوب مع شاشات الجوال */
-        @media (max-width: 768px) {
-            header {
-                padding: 15px 5%;
-            }
-            nav {
-                display: none; /* إخفاء الروابط للتبسيط على الجوال */
-            }
-            .hero h1 {
-                font-size: 2.1rem;
-            }
-            .hero p {
-                font-size: 1rem;
-            }
-            .hero-actions {
-                flex-direction: column;
-                width: 100%;
-            }
-            .btn-main, .btn-secondary {
-                width: 100%;
-                text-align: center;
-            }
+        .nav-item.active i {
+            filter: drop-shadow(0 0 6px var(--accent-red));
         }
     </style>
 </head>
 <body>
 
-    <div class="glow-bg"></div>
+    <div class="app-container">
 
-    <!-- شريط الرأس -->
-    <header>
-        <div class="logo">
-            <i class="fa-solid fa-code"></i>
-            <span>مشروعي</span>
-        </div>
-        <nav>
-            <a href="#">الرئيسية</a>
-            <a href="#features">المميزات</a>
-            <a href="#about">حول الموقع</a>
-        </nav>
-        <button class="btn-main" onclick="alert('أهلاً بك في موقعنا الجديد!')">ابدأ الآن</button>
-    </header>
+        <!-- 1. شريط الرأس -->
+        <header class="top-bar">
+            <div class="logo">
+                <i class="fa-solid fa-crown" style="font-size: 1.2rem;"></i> Ben
+            </div>
+            <div class="top-icons">
+                <button class="icon-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="icon-btn">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notif-badge"></span>
+                </button>
+                <button class="icon-btn"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </header>
 
-    <!-- واجهة الموقع الترحيبية -->
-    <section class="hero">
-        <div class="hero-badge">
-            <i class="fa-solid fa-bolt"></i> واجهة سريعة وخفيفة
-        </div>
-        <h1>ابنِ مشروعك القادم بأسلوب <span>احترافي وحديث</span></h1>
-        <p>هذه الواجهة مجهزة بالكامل لتكون منصتك الخاصة على الإنترنت، متناسقة وسريعة وسهلة التعديل بأي وقت.</p>
-        <div class="hero-actions">
-            <a href="#features" class="btn-main">استكشف الأقسام</a>
-            <a href="#" class="btn-secondary">معلومات أكثر</a>
-        </div>
-    </section>
-
-    <!-- قسم البطاقات والمميزات -->
-    <section class="features" id="features">
-        <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
-            <h3>متوافق مع الجوال</h3>
-            <p>التصميم يتجاوب تلقائياً مع أحجام الشاشات المختلفة سواء كنت تتصفح من الموبايل أو شاشة الكمبيوتر.</p>
+        <!-- 2. البانر الرئيسي -->
+        <div class="hero-banner">
+            <h1 class="hero-title"><i class="fa-solid fa-crown"></i> Ben</h1>
+            <h2 class="hero-subtitle">سكريتات روبلوكس بكل سهولة</h2>
+            <p class="hero-desc">اكتشف أفضل السكريبتات وأحدث التحديثات</p>
+            <button class="btn-banner">
+                تصفح السكريتات <i class="fa-solid fa-angle-left"></i>
+            </button>
+            <div class="slider-dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
         </div>
 
-        <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-gauge-high"></i></div>
-            <h3>سرعة تحميل فائقة</h3>
-            <p>الكود مكتوب بـ HTML و CSS خالص بدون أي مكتبات ثقيلة تبطئ الموقع.</p>
+        <!-- 3. شريط البحث -->
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="ابحث عن سكربت أو ماب...">
         </div>
 
-        <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
-            <h3>استضافة مجانية 100%</h3>
-            <p>مرفوع ومدعوم مباشرة عبر سيرفرات GitHub Pages بدون الحاجة لدفع سنت واحد.</p>
+        <!-- 4. الأقسام السريعة -->
+        <div class="categories-grid">
+            <div class="category-card">
+                <i class="fa-solid fa-shapes"></i>
+                <span>الأقسام</span>
+            </div>
+            <div class="category-card">
+                <i class="fa-solid fa-fire"></i>
+                <span>الأكثر تميزاً</span>
+            </div>
+            <div class="category-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>أمان وحماية</span>
+            </div>
+            <div class="category-card">
+                <i class="fa-solid fa-bolt"></i>
+                <span>التحديثات</span>
+            </div>
+            <div class="category-card">
+                <i class="fa-solid fa-crown"></i>
+                <span>جميع السكريبتات</span>
+            </div>
         </div>
-    </section>
 
-    <!-- الفوتر -->
-    <footer>
-        <p>جميع الحقوق محفوظة &copy; 2026 | تم الإنشاء بواسطة GitHub Pages</p>
-    </footer>
+        <!-- 5. قسم أحدث السكريبتات -->
+        <div class="section-header">
+            <div class="section-title">
+                <i class="fa-solid fa-fire-flame-curved"></i> أحدث السكريبتات
+            </div>
+            <a href="#" class="view-all">عرض الكل <i class="fa-solid fa-angle-left"></i></a>
+        </div>
 
+        <!-- قائمة السكريبتات -->
+        <div class="scripts-list">
+            <!-- كارت 1 -->
+            <div class="script-card">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=150" alt="Blox Fruits" class="script-thumb">
+                <div class="script-info">
+                    <span class="badge">تحديث جديد</span>
+                    <h3 class="script-name">سكربت بلووكس فروت</h3>
+                    <p class="script-desc">تجميع فواكه - تفريم تلقائي - وغيرها</p>
+                    <div class="script-meta">
+                        <span><i class="fa-regular fa-eye"></i> 3.2K</span>
+                        <span><i class="fa-regular fa-clock"></i> منذ 5 ساعات</span>
+                    </div>
+                </div>
+                <button class="btn-download" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/.../main.lua\'))()')">
+                    <i class="fa-solid fa-download"></i> تحميل
+                </button>
+            </div>
+
+            <!-- كارت 2 -->
+            <div class="script-card">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=150" alt="99 Nights" class="script-thumb">
+                <div class="script-info">
+                    <span class="badge">تحديث جديد</span>
+                    <h3 class="script-name">سكربت 99 نايتس</h3>
+                    <p class="script-desc">هك • تسريع • أشياء كثيرة</p>
+                    <div class="script-meta">
+                        <span><i class="fa-regular fa-eye"></i> 4.8K</span>
+                        <span><i class="fa-regular fa-clock"></i> منذ 12 ساعة</span>
+                    </div>
+                </div>
+                <button class="btn-download" onclick="copyScript('loadstring(...)()')">
+                    <i class="fa-solid fa-download"></i> تحميل
+                </button>
+            </div>
+
+            <!-- كارت 3 -->
+            <div class="script-card">
+                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=150" alt="Brainrot" class="script-thumb">
+                <div class="script-info">
+                    <span class="badge">تحديث جديد</span>
+                    <h3 class="script-name">سكربت سرقة البيض</h3>
+                    <p class="script-desc">تجميع تلقائي - حماية كاملة</p>
+                    <div class="script-meta">
+                        <span><i class="fa-regular fa-eye"></i> 6.7K</span>
+                        <span><i class="fa-regular fa-clock"></i> منذ يوم</span>
+                    </div>
+                </div>
+                <button class="btn-download" onclick="copyScript('loadstring(...)()')">
+                    <i class="fa-solid fa-download"></i> تحميل
+                </button>
+            </div>
+        </div>
+
+        <!-- 6. إعلان تيليجرام -->
+        <div class="tg-banner">
+            <div class="tg-content">
+                <i class="fa-brands fa-telegram tg-icon"></i>
+                <div class="tg-text">
+                    <h4>انضم إلى قناتنا على تيليجرام</h4>
+                    <p>للحصول على آخر التحديثات وأهم السكريبتات أولاً</p>
+                </div>
+            </div>
+            <button class="btn-tg">انضم الآن <i class="fa-solid fa-angle-left"></i></button>
+        </div>
+
+    </div>
+
+    <!-- 7. شريط التنقل السفلي -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fa-solid fa-shapes"></i>
+            <span>السكريبتات</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fa-regular fa-heart"></i>
+            <span>المفضلة</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fa-regular fa-bell"></i>
+            <span>الإشعارات</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fa-regular fa-user"></i>
+            <span>حسابي</span>
+        </a>
+    </nav>
+
+    <script>
+        // دالة نسخ السكربت عند الضغط على تحميل
+        function copyScript(luaCode) {
+            navigator.clipboard.writeText(luaCode).then(() => {
+                alert('تم نسخ السكربت بنجاح إلى الحافظة!');
+            }).catch(() => {
+                prompt('انسخ كود السكربت من هنا:', luaCode);
+            });
+        }
+
+        // فلترة البحث
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            let val = e.target.value.toLowerCase();
+            document.querySelectorAll('.script-card').forEach(card => {
+                let text = card.querySelector('.script-name').innerText.toLowerCase();
+                card.style.display = text.includes(val) ? 'flex' : 'none';
+            });
+        });
+    </script>
 </body>
 </html>
